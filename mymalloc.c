@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * mymalloc.c
  */
@@ -70,3 +71,6 @@ int main (int number_of_args, char * arg_list[] ) {
     printf("pointer is of size: %ld\n", sizeof(size_t));
 }
 
+=======
+#include <stdio.h>
+>>>>>>> 4e8ac626801420eb5c3198165a86224d4e90d297
