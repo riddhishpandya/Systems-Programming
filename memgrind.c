@@ -66,8 +66,29 @@ void testB(){
 
 void testC(){
 
-}
+   int malloc_counter = 0;
+   int free_counter = 0;
+   int total_counter = 0;
+   time_t t;
+  
+   /* Intializes random number generator */
+   srand((unsigned) time(&t));
 
+   while(total_counter < 6000) {
+
+   		int random_number = rand() % 2;
+   		if(random_number == 0 && malloc_counter < 3000) {
+   			malloc_counter++;
+   			total_counter++;
+   		}else if (random_number == 1 && free_counter < 3000) {
+   			free_counter++;
+   			total_counter++;
+   		}
+
+   }
+   printf("total_counter is: %d\nmalloc_counter is: %d\nfree_counter is: %d\n",total_counter,malloc_counter,free_counter);
+
+}
 void testD(){
 
 }
@@ -81,6 +102,7 @@ int main( int number_of_args, char* arg_list[] ) {
 	block_init();
 	testA();
 	testB();
+	testC();
     
     return 0;
 }
