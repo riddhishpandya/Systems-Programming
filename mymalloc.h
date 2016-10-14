@@ -1,7 +1,7 @@
 #ifndef __MY_MALLOC_H__
 #define __MY_MALLOC_H__
 
-#define ERROR_NOT_A_PTR printf("ERROR: Not a pointer. Line: %d File: %s\n", __LINE__, __FILE__);
+#define ERROR_NOT_ALLOCATED printf("ERROR: Attempted to free an unallocated block. Line: %d File: %s\n", __LINE__, __FILE__);
 
 
 void block_init();
