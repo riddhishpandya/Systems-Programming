@@ -1,4 +1,4 @@
-/*
+ /*
  * mymalloc.c
  */
 #include <stdio.h>
@@ -27,7 +27,6 @@ void* mymalloc (size_t size, char* file, int line) {
 	if(size%2 != 0) {
 		size = size + 1;
 	}
-	int n = 0;
 	while(((*((short int *)ptr)) & 1) || (*((short int *)ptr)& ~0x01) < size + 4) {
 
 		if((*((short int *)ptr)& ~0x01) == size && !((*((short int *)ptr)) & 1)) {
@@ -42,7 +41,6 @@ void* mymalloc (size_t size, char* file, int line) {
            = current address + size of block + header + footer of current block  */
 		short int int_actual_size = *((short int *)ptr) & ~0x01;
 		ptr = ptr + int_actual_size + 4;
- 		n++;
 	}
 	/*if code reaches here --> current address points to metadata of free block of >= size */
 	short int free_block_size = *((short int *)ptr);
@@ -58,9 +56,7 @@ void* mymalloc (size_t size, char* file, int line) {
 	/*splitting the free block after completing allocation of new space */
 	ptr = ptr + size + 4;
 	short int new_free_block_size = free_block_size - size - 4;
-	//printf("new_free_block_size is at %hu\n",new_free_block_size);
 	*((short int *)ptr) = new_free_block_size;
-	//printf("ptr of free block %p\n",ptr);
 	ptr = ptr + 2 + new_free_block_size;
 	*((short int *)ptr) = new_free_block_size;	
 
@@ -75,12 +71,9 @@ void myfree (void * mem_location, char* file, int line) {
 		return;
 	}
 	char * header = (char *)mem_location - 2; //header of freeing block
-	//printf("size of freeing block is %hu\n\n", ((*((short int *)header)) & ~0x01));
-
 
 	short int * footer = (short int *)(header + 2 + (*((short int *)(header)) & ~0x01)); //footer of current block
 
-	//printf("size of freeing footer block is %hu\n", ((*((short int *)footer)) & ~0x01));
 	/* check to see if it is a pointer in the block (addresses that are not pointers is also checked here) */
 	if(header < &myblock[0] || header > &myblock[4999]) { //if ptr is not in the block
 		ERROR_NOT_ALLOCATED;
