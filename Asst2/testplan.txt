@@ -1,0 +1,135 @@
+CS 214: Systems Programming 
+Fall 2016 
+Assignment 2: Procs vs Threads (round 0)
+Riddhish Pandya & Kendrew Shum
+Test Plan
+
+Input Error Cases:
+
+Test01: incorrect amount of arguments
+
+./compressR_LOLS test.txt
+INPUT FORMAT: ./compressR_LOLS.c <file to compress> <number of parts>
+
+./compressT_LOLS test.txt
+INPUT FORMAT: ./compressR_LOLS.c <file to compress> <number of parts>
+
+Test02: invalid number of parts
+
+./compressR_LOLS test.txt f4
+ERROR: NUMBER OF PARTS MUST BE AN INTEGER > 0
+
+./compressT_LOLS test.txt f4
+ERROR: NUMBER OF PARTS MUST BE AN INTEGER
+
+Test03: file does not exist
+
+./compressR_LOLS notrealfile.txt 5
+ERROR: INVALID FILE TO COMPRESS
+
+./compressT_LOLS notrealfile.txt 5
+ERROR: INVALID FILE TO COMPRESS
+
+Test04: empty file
+
+./compressR_LOLS emptyfile.txt 2
+ERROR: INPUT FILE IS EMPTY
+
+./compressT_LOLS emptyfile.txt 2
+ERROR: INPUT FILE IS EMPTY
+
+Test05: number of parts exceeds file length
+
+./compressR_LOLS test.txt 5000
+ERROR: NUMBER OF PARTS EXCEEDS CHARACTERS IN FILE
+
+./compressT_LOLS test.txt 5000
+ERROR: NUMBER OF PARTS EXCEEDS CHARACTERS IN FILE
+
+
+Sample Test Cases:
+
+Test01:
+./compressT_LOLS test.txt 2
+./compressR_LOLS test.txt 2
+
+test.txt = "oooo\n"
+
+test_txt_LOLS0 = "oo"
+test_txt_LOLS1 = "oo"
+
+
+Test02:
+./compressT_LOLS test.txt 1
+./compressR_LOLS test.txt 1
+
+test.txt = "jjjjjjjjoooaaaaanrr\n"
+
+test_txt_LOLS = "8j3o5anrr"
+
+Test03: 
+./compressT_LOLS test.txt 2
+./compressR_LOLS test.txt 2
+
+test.txt = "jjjjjjjjoooaaaaanrr\n"
+
+test_txt_LOLS0 = "8joo"
+test_txt_LOLS1 = "o5anrr"
+
+Test04:
+./compressT_LOLS test.txt 3
+./compressR_LOLS test.txt 3
+
+test.txt = "aaa bbb ccc \n"
+
+test_txt_LOLS0 = "3a"
+test_txt_LOLS1 = "3b"
+test_txt_LOLS2 = "3c"
+
+Test05:
+./compressT_LOLS test.txt 1
+./compressR_LOLS test.txt 1
+
+test.txt = "!aa       aaa       aaaa       !\n"
+
+test_txt_LOLS = "9a"
+
+
+Test06:
+./compressT_LOLS test.txt 1
+./compressR_LOLS test.txt 1
+
+test.txt = "!aa       aaa       aaaa       !\n"
+
+test_txt_LOLS = "9a"
+
+
+Test07:
+./compressT_LOLS test.txt 1
+./compressR_LOLS test.txt 1
+
+test.txt = "!!!!!!!!!!!!!!!!!!!!!"
+
+test_txt_LOLS0 = ""
+test_txt_LOLS1 = ""
+test_txt_LOLS2 = ""
+
+Test08:
+./compressT_LOLS test.txt 1
+./compressR_LOLS test.txt 1
+
+test.txt = "!!!!!!!!!!!!!!!!!!!!!"
+
+test_txt_LOLS0 = ""
+test_txt_LOLS1 = ""
+test_txt_LOLS2 = ""
+
+
+
+
+
+
+
+
+
+
